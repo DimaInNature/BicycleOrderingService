@@ -1,0 +1,115 @@
+﻿<Window
+    x:Class="BicycleOrderingService.Views.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BicycleOrderingService.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:BicycleOrderingService.ViewModels"
+    x:Name="ThisWindow"
+    Title="MainWindow"
+    Width="800"
+    Height="400"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Window.DataContext>
+        <vm:LoginViewModel />
+    </Window.DataContext>
+
+    <Grid Width="790" HorizontalAlignment="Center">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStop Offset="0" Color="#CD2682" />
+                <GradientStop Offset="1" Color="#FF112DDE" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Label
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Margin="0,6,0,61"
+            HorizontalContentAlignment="Center"
+            Content="Авторизация"
+            FontSize="40"
+            Foreground="White" />
+
+        <Label
+            Grid.Row="1"
+            Padding="200,100,0,0"
+            HorizontalContentAlignment="Left"
+            Content="Введите логин:"
+            FontFamily="Tahoma"
+            FontSize="14"
+            Foreground="White" />
+
+        <TextBox
+            x:Name="Login"
+            Grid.Row="2"
+            Width="400"
+            Height="25"
+            VerticalContentAlignment="Center"
+            FontFamily="Tahoma"
+            Text="{Binding UserLogin}" />
+
+        <Label
+            Grid.Row="3"
+            Padding="200,15,0,0"
+            HorizontalContentAlignment="Left"
+            Content="Введите пароль:"
+            FontFamily="Tahoma"
+            FontSize="14"
+            Foreground="White" />
+
+        <PasswordBox
+            x:Name="PasswordBox"
+            Grid.Row="4"
+            Width="400"
+            Height="25"
+            VerticalContentAlignment="Center"
+            FontFamily="Tahoma"
+            FontSize="20"
+            PasswordChanged="Password_OnPasswordChanged" />
+
+        <StackPanel
+            Grid.Row="5"
+            Margin="0,40,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+
+            <Button
+                Name="EnterButton"
+                Width="100"
+                Height="35"
+                Margin="10,0,10,60"
+                Command="{Binding EnterButtonClickCommand}"
+                Content="Вход"
+                FontFamily="Tahoma"
+                FontSize="20"
+                Style="{DynamicResource ButtonStyle}" />
+
+            <Button
+                Width="200"
+                Height="35"
+                Margin="10,0,10,60"
+                Command="{Binding RegisterButtonClickCommand}"
+                CommandParameter="{Binding ElementName=ThisWindow}"
+                Content="Регистрация"
+                FontFamily="Tahoma"
+                FontSize="20"
+                Style="{DynamicResource ButtonStyle}" />
+
+        </StackPanel>
+    </Grid>
+</Window>

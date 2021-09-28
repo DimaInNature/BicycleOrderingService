@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using BicycleOrderingService.Services;
+using BicycleOrderingService.ViewModels;
+using BicycleOrderingService.Views;
 
 namespace BicycleOrderingService
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public DisplayWindowService DisplayWindow { get; private set; } = new DisplayWindowService();
+
+        public App()
+        {
+            // Регистрация связей всех ViewModel и их View
+
+            DisplayWindow.RegisterWindow<LoginViewModel, LoginView>();
+            DisplayWindow.RegisterWindow<RegistrationViewModel, RegistrationView>();
+        }
     }
 }
