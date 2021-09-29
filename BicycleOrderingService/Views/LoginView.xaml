@@ -10,6 +10,7 @@
     Title="MainWindow"
     Width="800"
     Height="400"
+    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -94,6 +95,7 @@
                 Height="35"
                 Margin="10,0,10,60"
                 Command="{Binding EnterButtonClickCommand}"
+                CommandParameter="{Binding ElementName=ThisWindow}"
                 Content="Вход"
                 FontFamily="Tahoma"
                 FontSize="20"

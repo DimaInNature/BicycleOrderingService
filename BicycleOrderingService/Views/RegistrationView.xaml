@@ -10,6 +10,7 @@
     Title="RegistrationView"
     Width="800"
     Height="450"
+    ResizeMode="NoResize"
     mc:Ignorable="d">
 
     <Window.DataContext>

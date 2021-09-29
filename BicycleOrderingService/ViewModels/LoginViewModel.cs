@@ -1,11 +1,13 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Security;
+﻿using BicycleOrderingService.Services.Command;
 using BicycleOrderingService.ViewModels.Base;
 using BicycleOrderingService.Views;
+using System;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Windows;
 using System.Windows.Input;
-using BicycleOrderingService.Services.Command;
+using BicycleOrderingService.Data;
+using BicycleOrderingService.Services;
 
 namespace BicycleOrderingService.ViewModels
 {
@@ -86,7 +88,44 @@ namespace BicycleOrderingService.ViewModels
 
         private void EnterButtonClick(object obj)
         {
-            
+            if (UserLogin != String.Empty && UserPassword != String.Empty)
+            {
+                if (ValidationService.Validation(UserLogin,UserPassword))
+                {
+                    var activeUser = DataManager.User.GetByLoginAndPassword(UserLogin, UserPassword);
+
+                    if (activeUser.IsAdmin)
+                    {
+                        var view = obj as LoginView;
+
+                        var displayRootRegistry = (Application.Current as App).DisplayWindow;
+
+                        displayRootRegistry.Show(new AdminMainViewModel(activeUser));
+
+                        view.Close();
+                    }
+                    else
+                    {
+                        var view = obj as LoginView;
+
+                        var displayRootRegistry = (Application.Current as App).DisplayWindow;
+
+                        displayRootRegistry.Show(new MainViewModel(activeUser));
+
+                        view.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пользователя с таким логином и паролем несуществует", "Ошибка ввода данных",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Заполните поля ввода логина и пароля.", "Ошибка ввода данных",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         #endregion

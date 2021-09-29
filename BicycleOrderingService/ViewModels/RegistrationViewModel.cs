@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
 using System.Windows.Input;
+using BicycleOrderingService.Data;
 using BicycleOrderingService.Models;
 using BicycleOrderingService.Services.Command;
 using BicycleOrderingService.ViewModels.Base;
@@ -29,7 +30,7 @@ namespace BicycleOrderingService.ViewModels
             }
         }
 
-        private string _userLogin;
+        private string _userLogin = String.Empty;
 
         public SecureString SecurePassword
         {
@@ -85,7 +86,7 @@ namespace BicycleOrderingService.ViewModels
             }
         }
 
-        private string _userName;
+        private string _userName = String.Empty;
 
         public string UserSurname
         {
@@ -96,7 +97,7 @@ namespace BicycleOrderingService.ViewModels
             }
         }
 
-        private string _userSurname;
+        private string _userSurname = String.Empty;
 
         #endregion
 
@@ -108,13 +109,34 @@ namespace BicycleOrderingService.ViewModels
 
         private void RegistrationButtonClick(object obj)
         {
-            new User()
+            if (UserLogin != String.Empty && UserPassword != String.Empty 
+            && UserName != String.Empty && UserSurname != String.Empty)
             {
-                Login = UserLogin,
-                Password = UserPassword,
-                Name = UserName,
-                Surname = UserSurname
-            };
+                UserModel user = new UserModel()
+                {
+                    Login = UserLogin,
+                    Password = UserPassword,
+                    Name = UserName,
+                    Surname = UserSurname,
+                    IsAdmin = false
+                };
+
+                if (DataManager.User.Create(user))
+                {
+                    var view = obj as RegistrationView;
+
+                    var displayRootRegistry = (Application.Current as App).DisplayWindow;
+
+                    displayRootRegistry.Show(new MainViewModel(user));
+
+                    view.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Необходимо заполнить все поля.", "Ошибка ввода данных",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         #endregion

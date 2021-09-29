@@ -1,7 +1,15 @@
 ﻿namespace BicycleOrderingService.Models
 {
-    public class User
+    public class UserModel
     {
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+
+        private int _id;
+
         public string Login
         {
             get => _login;
@@ -33,5 +41,14 @@
         }
 
         private string _surname;
+
+        public bool IsAdmin
+        {
+            get => _isAdmin;
+            set => _isAdmin = value;
+        }
+
+        private bool _isAdmin;
+
     }
 }

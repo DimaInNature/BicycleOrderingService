@@ -23,34 +23,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
 
-                    <Grid>
-                        <Rectangle
-                            Fill="{TemplateBinding Background}"
-                            RadiusX="5"
-                            RadiusY="5" />
-                        <Rectangle
-                            Width="{TemplateBinding MinWidth}"
-                            HorizontalAlignment="Left"
-                            RadiusX="5"
-                            RadiusY="5">
-                            <Rectangle.Fill>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <LinearGradientBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform CenterX="0.5" CenterY="0.5" />
-                                            <SkewTransform CenterX="0.5" CenterY="0.5" />
-                                            <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5" />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </LinearGradientBrush.RelativeTransform>
-                                </LinearGradientBrush>
-                            </Rectangle.Fill>
-                        </Rectangle>
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
                         <ContentPresenter
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Content}" />
-                    </Grid>
+                    </Border>
 
                 </ControlTemplate>
             </Setter.Value>

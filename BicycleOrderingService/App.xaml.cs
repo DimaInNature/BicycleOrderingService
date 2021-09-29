@@ -11,10 +11,10 @@ namespace BicycleOrderingService
 
         public App()
         {
-            // Регистрация связей всех ViewModel и их View
-
             DisplayWindow.RegisterWindow<LoginViewModel, LoginView>();
             DisplayWindow.RegisterWindow<RegistrationViewModel, RegistrationView>();
+            DisplayWindow.RegisterWindow<MainViewModel, MainView>();
+            DisplayWindow.RegisterWindow<AdminMainViewModel, AdminMainView>();
         }
     }
 }
